@@ -34,7 +34,7 @@ function App(props: PropsState) {
                            />}/>
                     <Route component={News} path={'/news'}/>
                     <Route component={Music} path={'/music'}/>
-                    <Route component={Settings} exqct path={'/settings'}/>
+                    <Route component={Settings} exact path={'/settings'}/>
                 </div>
             </div>
         </BrowserRouter>

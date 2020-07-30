@@ -3,17 +3,15 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {
-    ActionType, addNewMessageActionCreator,
+    ActionType,
     DialogsDataType,
-    updateNewMessageTextActionCreator,
 } from "../../redux/state";
+import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 type PropsType = {
     state: DialogsDataType
     dispatch: (action: ActionType) => void
 }
-
-
 
 const Dialogs = (props: PropsType) => {
     let dialogElements = props.state.dialogsData.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id}/>)

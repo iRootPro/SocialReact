@@ -3,17 +3,14 @@ import Post, {PropsPostType} from "./Post/Post";
 import s from './MyPosts.module.css'
 import {
     ActionType,
-    addPostActionCreator,
-    postsType, updateNewPostTextActionCreator,
+    postsType,
 } from "../../../redux/state";
+import {updateNewPostTextActionCreator, addPostActionCreator} from "../../../redux/profile-redicer";
 
 export type PropsType = {
     state: postsType
     dispatch: (action: ActionType) => void
 }
-
-
-
 
 const MyPosts = (props: PropsType) => {
     let postElements = props.state.posts.map(post => <Post key={post.id} message={post.message} like={post.like}
