@@ -1,11 +1,17 @@
 import React from 'react';
 import * as serviceWorker from './serviceWorker';
-import {StateType, StoreType} from "./redux/state";
+import {DialogsDataType, postsType, StateType, StoreType} from "./redux/store";
 import ReactDOM from "react-dom";
 import App from "./App";
-import {store} from './redux/state'
+import store from './redux/redux-store'
 
-const rerender = (state: StateType) => {
+type storeStateType = {
+    profilePage: postsType,
+    dialogPage: DialogsDataType
+}
+
+const rerender = (state: storeStateType) => {
+    console.log(store)
     ReactDOM.render(
         <React.StrictMode>
             <App state={store.getState()} dispatch = {store.dispatch.bind(store)}
@@ -16,7 +22,10 @@ const rerender = (state: StateType) => {
 }
 
 rerender(store.getState())
-store.subscribe(rerender)
+store.subscribe(() => {
+    let state = store.getState()
+    rerender(state)
+})
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

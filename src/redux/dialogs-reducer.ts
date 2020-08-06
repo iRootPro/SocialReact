@@ -1,11 +1,25 @@
-import {ActionType, DialogsDataType} from "./state";
+import {ActionType, DialogsDataType} from "./store";
 import {act} from "react-dom/test-utils";
 
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 
+let initState = {
+    dialogsData: [
+        {id: 1, name: 'Alex'},
+        {id: 2, name: 'Sasha'},
+        {id: 3, name: 'Petr'},
+        {id: 4, name: 'Ivan'}
+    ],
+    messagesData: [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Yo'}
+    ],
+    newMessageText: ''
+}
 
-export const dialogsReducer = (state: DialogsDataType, action: ActionType) => {
+export const dialogsReducer = (state: DialogsDataType = initState, action: ActionType) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:

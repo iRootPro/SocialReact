@@ -4,7 +4,7 @@ import s from './MyPosts.module.css'
 import {
     ActionType,
     postsType,
-} from "../../../redux/state";
+} from "../../../redux/store";
 import {updateNewPostTextActionCreator, addPostActionCreator} from "../../../redux/profile-redicer";
 
 export type PropsType = {
