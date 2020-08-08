@@ -1,8 +1,7 @@
 import React from "react";
-import classes from './Profile.module.css'
-import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType} from "../../redux/store";
+import {ActionType, StoreType} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
 type PropsType = {
@@ -20,13 +19,11 @@ type Posts = {
     message: string
     like: number
 }
-
-const Profile = (props: PropsType) => {
-
+const Profile = (props: any) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts state={props.state} dispatch={props.dispatch}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     )
 }

@@ -2,31 +2,30 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-    ActionType,
-    DialogsDataType,
-} from "../../redux/store";
-import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {DialogsDataType, PropsDialogType, PropsMessageType} from "../../redux/store";
 
 type PropsType = {
-    state: DialogsDataType
-    dispatch: (action: ActionType) => void
+    dialogsPage: DialogsDataType
+    updateNewMessageBody: (text: string) => void
+    sendMessage: () => void
 }
 
 const Dialogs = (props: PropsType) => {
-    let dialogElements = props.state.dialogsData.map(dialog => <DialogItem key={dialog.id} name={dialog.name} id={dialog.id}/>)
-    let messageElements = props.state.messagesData.map(message => <Message key={message.id} message={message.message} id={message.id}/>)
+    let dialogElements = props.dialogsPage.dialogsData.map(dialog => <DialogItem key={dialog.id} name={dialog.name}
+                                                                       id={dialog.id}/>)
+    let messageElements = props.dialogsPage.messagesData.map(message => <Message key={message.id} message={message.message}
+                                                                       id={message.id}/>)
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
 
     const addMessage = () => {
-        props.dispatch(addNewMessageActionCreator())
+        props.sendMessage()
     }
 
     const onChangeNewMessageHandler = () => {
         if (newMessageElement.current) {
             let textMessage = newMessageElement.current.value
-            props.dispatch(updateNewMessageTextActionCreator(textMessage))
+            props.updateNewMessageBody(textMessage)
         }
     }
 
@@ -39,8 +38,11 @@ const Dialogs = (props: PropsType) => {
                 {messageElements}
             </div>
 
-            <div><textarea onChange={onChangeNewMessageHandler} ref={newMessageElement} value={props.state.newMessageText} /></div>
-            <div><button onClick={addMessage}>Add message</button></div>
+            <div><textarea onChange={onChangeNewMessageHandler} ref={newMessageElement}
+                           value={props.dialogsPage.newMessageText}/></div>
+            <div>
+                <button onClick={addMessage}>Add message</button>
+            </div>
         </div>
     )
 }
