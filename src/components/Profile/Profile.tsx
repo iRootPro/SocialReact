@@ -19,11 +19,11 @@ type Posts = {
     message: string
     like: number
 }
-const Profile = (props: any) => {
+const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}/>
+            <MyPostsContainer/>
         </div>
     )
 }

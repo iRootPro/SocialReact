@@ -4,6 +4,8 @@ import {DialogsDataType, postsType, StateType, StoreType} from "./redux/store";
 import ReactDOM from "react-dom";
 import App from "./App";
 import store from './redux/redux-store'
+import {Provider} from "./StoreContext";
+
 
 export type storeStateType = {
     profilePage: postsType,
@@ -13,9 +15,9 @@ export type storeStateType = {
 const rerender = (state: storeStateType) => {
     ReactDOM.render(
         <React.StrictMode>
-            <App
-               store={store}
-            />
+            <Provider store={store}>
+                <App/>
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
