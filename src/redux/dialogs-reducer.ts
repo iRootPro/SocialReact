@@ -1,5 +1,4 @@
 import {ActionType, DialogsDataType} from "./store";
-import {act} from "react-dom/test-utils";
 
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";

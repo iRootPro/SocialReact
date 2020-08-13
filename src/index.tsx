@@ -1,10 +1,10 @@
 import React from 'react';
 import * as serviceWorker from './serviceWorker';
-import {DialogsDataType, postsType, StateType, StoreType} from "./redux/store";
+import {DialogsDataType, postsType} from "./redux/store";
 import ReactDOM from "react-dom";
 import App from "./App";
 import store from './redux/redux-store'
-import {Provider} from "./StoreContext";
+import {Provider} from "react-redux";
 
 
 export type storeStateType = {
