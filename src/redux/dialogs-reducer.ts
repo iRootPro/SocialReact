@@ -23,7 +23,7 @@ export const dialogsReducer = (state: DialogsDataType = initState, action: Actio
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             if (action.newMessage) {
-                state.newMessageText = action.newMessage
+                return {...state, newMessageText: action.newMessage}
             }
             return state
         case ADD_NEW_MESSAGE:
@@ -31,9 +31,11 @@ export const dialogsReducer = (state: DialogsDataType = initState, action: Actio
                 id: 5,
                 message: state.newMessageText
             }
-            state.messagesData.push(newMessage)
-            state.newMessageText = ''
-            return state
+            const stateCopy = {...state}
+            stateCopy.messagesData = [...state.messagesData]
+            stateCopy.messagesData.push(newMessage)
+            stateCopy.newMessageText = ''
+            return stateCopy
         default:
             return state
     }
