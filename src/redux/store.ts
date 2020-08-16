@@ -7,6 +7,7 @@ import {
     addNewMessageActionCreator,
     updateNewMessageTextActionCreator
 } from "./dialogs-reducer";
+import {StateUserPageType} from "./users-reducer";
 
 export type ActionType =
     ReturnType<typeof updateNewMessageTextActionCreator> |
@@ -25,6 +26,7 @@ export type StoreType = {
 export type StateType = {
     profilePage: postsType
     dialogPage: DialogsDataType;
+    usersPage: StateUserPageType
 }
 
 export type postsType = {

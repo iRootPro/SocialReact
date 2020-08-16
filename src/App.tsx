@@ -8,9 +8,9 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-function App()
-{
+function App() {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -20,6 +20,8 @@ function App()
                     <Route path={'/profile'} render={() => <Profile/>}/>
                     <Route path={'/dialogs'}
                            render={() => <DialogsContainer/>}/>
+                    <Route path={'/users'}
+                           render={() => <UsersContainer/>}/>
                     <Route component={News} path={'/news'}/>
                     <Route component={Music} path={'/music'}/>
                     <Route component={Settings} exact path={'/settings'}/>
