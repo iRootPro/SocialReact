@@ -14,11 +14,16 @@ export type StateUserPageType = {
 
 export type UserType = {
     id: number
-    photoURL: string
+    photos: photos
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
+}
+
+type photos = {
+    small: null | string
+    large: null | string
 }
 
 type LocationType = {
