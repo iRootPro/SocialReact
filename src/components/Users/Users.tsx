@@ -2,22 +2,44 @@ import React from "react";
 import {UserType} from "../../redux/users-reducer";
 import axios from 'axios'
 import avatar from '../../assets/img/avatar.png'
+import classes from './users.module.css'
+import {log} from "util";
 
 type PropsType = {
     users: Array<UserType>,
     follow: (id: number) => void,
     unfollow: (id: number) => void,
-    setUsers: (users: Array<UserType>) => void
+    setUsers: (users: Array<UserType>) => void,
+    setCurrentPage: (pageNumber: number) => void,
+    setTotalUserCount: (totalCount: number) => void,
+    pageSize: number,
+    totalCount: number,
+    currentPage: number
 }
 
 class Users extends React.Component<PropsType> {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(res => this.props.setUsers(res.data.items))
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+            this.props.setUsers(res.data.items)
+            this.props.setTotalUserCount(res.data.totalCount)
+            console.log(res.data.totalCount)
+        })
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(res => this.props.setUsers(res.data.items))
     }
 
     render() {
+        const pagesSize = Math.ceil(this.props.totalCount / this.props.pageSize)
+        const pages = []
+        for (let i = 1; i <= pagesSize; i++) pages.push(i)
         return (
             <div>
+                <div>
+                    { pages.map(p => <span key={p} className={this.props.currentPage === p? classes.selectedPage: ''} onClick={() => this.onPageChanged(p)} >{p}</span>)}
+                </div>
                 {
                     this.props.users.map(u => <div key={u.id}>
                     <span>
