@@ -2,7 +2,7 @@ import {
     ActionType,
     postsType,
 } from "../../../redux/store";
-import {updateNewPostTextActionCreator, addPostActionCreator} from "../../../redux/profile-redicer";
+import {updateNewPostTextActionCreator, addPostActionCreator} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {storeStateType} from "../../../index";
