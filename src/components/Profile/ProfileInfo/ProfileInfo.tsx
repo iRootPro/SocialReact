@@ -25,6 +25,5 @@ export const ProfileInfo = (props: PropsType) => {
                 ava + description
             </div>
         </div>
-
     )
 }
