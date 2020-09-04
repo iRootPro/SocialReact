@@ -30,7 +30,9 @@ type PropsType = {
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(res => {
             this.props.setIsFetching(false)
             this.props.setUsers(res.data.items)
             this.props.setTotalUserCount(res.data.totalCount)
@@ -40,7 +42,9 @@ class UsersContainer extends React.Component<PropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        }).then(res => {
             this.props.setIsFetching(false)
             this.props.setUsers(res.data.items)
 

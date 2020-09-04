@@ -52,14 +52,14 @@ export const usersReducer = (state: StateUserPageType = initState, action: Actio
         case FOLLOW:
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userID) return {...u, followed: false}
+                    if (u.id === action.userID) return {...u, followed: true}
                     return u
                 })
             }
         case UNFOLLOW:
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userID) return {...u, followed: true}
+                    if (u.id === action.userID) return {...u, followed: false}
                     return u
                 })
             }
