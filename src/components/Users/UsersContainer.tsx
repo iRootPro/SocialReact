@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import Users from "./Users";
 import preloader from "./../../assets/img/preloader.svg"
+import {getUsers} from "../../api/api";
 
 type PropsType = {
     users: Array<UserType>,
@@ -30,24 +31,19 @@ type PropsType = {
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(res => {
+        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setIsFetching(false)
-            this.props.setUsers(res.data.items)
-            this.props.setTotalUserCount(res.data.totalCount)
+            this.props.setUsers(data.items)
+            this.props.setTotalUserCount(data.totalCount)
         })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        }).then(res => {
+        getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.setIsFetching(false)
-            this.props.setUsers(res.data.items)
-
+            this.props.setUsers(data.items)
         })
     }
 
