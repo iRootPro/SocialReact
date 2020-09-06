@@ -5,7 +5,6 @@ const initState = {
     email: null,
     login: null,
     isAuth: false
-    // isFetching: false
 }
 
 export type StateAuthType = {
@@ -13,7 +12,6 @@ export type StateAuthType = {
     email: string | null,
     login: string | null,
     isAuth: boolean
-    // isFetching: boolean
 }
 
 type ActionAuthType = ReturnType<typeof setAuthUserData>
@@ -32,4 +30,3 @@ export const authReducer = (state: StateAuthType = initState, action: ActionAuth
 }
 
 export const setAuthUserData = (userId: number, email: string, login: string) => ({type: SET_USER_DATA, data: {userId, email, login}})
-// export const setIsFetching = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)

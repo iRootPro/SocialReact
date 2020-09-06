@@ -9,10 +9,9 @@ import {
     unFollow,
     UserType
 } from "../../redux/users-reducer";
-import axios from "axios";
 import Users from "./Users";
 import preloader from "./../../assets/img/preloader.svg"
-import {getUsers} from "../../api/api";
+import {userAPI} from "../../api/api"
 
 type PropsType = {
     users: Array<UserType>,
@@ -31,7 +30,7 @@ type PropsType = {
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         this.props.setIsFetching(true)
-        getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
             this.props.setTotalUserCount(data.totalCount)
@@ -41,7 +40,7 @@ class UsersContainer extends React.Component<PropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true)
-        getUsers(pageNumber, this.props.pageSize).then(data => {
+        userAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.setIsFetching(false)
             this.props.setUsers(data.items)
         })
