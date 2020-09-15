@@ -3,7 +3,6 @@ import classes from "./users.module.css";
 import avatar from "../../assets/img/avatar.png";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {userAPI} from "../../api/api";
 
 
 type PropsType = {
@@ -14,7 +13,6 @@ type PropsType = {
     onPageChanged: (page: number) => void,
     follow: (id: number) => void,
     unfollow: (id: number) => void,
-    toggleFollowingProgress: (following: boolean, userId: number) => void,
     followingInProgress: Array<number>
 }
 
@@ -41,24 +39,12 @@ const Users = (props: PropsType) => {
                         <div>
                             {u.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    userAPI.unFollow(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.unfollow(u.id)
-                                        }
-                                    })
-                                    props.toggleFollowingProgress(false, u.id)
+                                    props.unfollow(u.id)
                                 }
                                 }>Unfollow</button>
                                 :
                                 <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.toggleFollowingProgress(true, u.id)
-                                    userAPI.follow(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.follow(u.id)
-                                        }
-                                    })
-                                    props.toggleFollowingProgress(false, u.id)
+                                   props.follow(u.id)
                                 }
                                 }>Follow</button>
                             }
