@@ -1,5 +1,6 @@
 import {ActionType, postsType} from "./store";
 import {ProfileType} from "../components/Profile/Profile";
+import {userAPI} from "../api/api";
 
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const ADD_POST = 'ADD-POST';
@@ -44,3 +45,8 @@ export const setUserProfile = (profile: ProfileType) => ({
     type: SET_USER_PROFILE,
     profile
 } as const)
+export const getUserProfile = (userId: number) => (dispatch: any) => {
+    userAPI.getProfile(userId).then(res => {
+        dispatch(setUserProfile(res.data))
+    })
+}

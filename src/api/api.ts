@@ -17,5 +17,14 @@ export const userAPI = {
     },
     follow(id: number) {
         return axiosWithSet.post(`follow/${id}`).then(res => res.data)
+    },
+    getProfile(userId: number) {
+        return axiosWithSet.get(`profile/${userId}`)
+    }
+}
+
+export const authAPI = {
+    me() {
+       return  axiosWithSet.get(`auth/me`)
     }
 }
