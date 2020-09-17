@@ -4,14 +4,17 @@ import {
 import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {storeStateType} from "../../index";
+import {AppStoreType} from "../../redux/redux-store";
+import {Redirect} from "react-router-dom";
+import React from "react";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-let mapStateToProps = (state:storeStateType) => {
+let mapStateToProps = (state: AppStoreType) => {
     return {
-      dialogsPage: state.dialogPage
+        dialogsPage: state.dialogPage,
     }
 }
-let mapDispatchToProps = (dispatch: (action: ActionType)=> void) => {
+let mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
     return {
         updateNewMessageBody: (text: string) => {
             dispatch(updateNewMessageTextActionCreator(text))
@@ -22,7 +25,9 @@ let mapDispatchToProps = (dispatch: (action: ActionType)=> void) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const AuthRedirectComponent = withAuthRedirect(Dialogs)
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
 
 export default DialogsContainer
 

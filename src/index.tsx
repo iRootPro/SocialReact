@@ -8,7 +8,8 @@ import {DialogsDataType, postsType} from "./redux/store";
 
 export type storeStateType = {
     profilePage: postsType,
-    dialogPage: DialogsDataType
+    dialogPage: DialogsDataType,
+    isAuth: boolean
 }
 
     ReactDOM.render(

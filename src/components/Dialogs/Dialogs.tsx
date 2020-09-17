@@ -3,18 +3,21 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsDataType} from "../../redux/store";
+import {Redirect} from 'react-router-dom';
 
 type PropsType = {
     dialogsPage: DialogsDataType
     updateNewMessageBody: (text: string) => void
     sendMessage: () => void
+    isAuth: boolean
 }
 
 const Dialogs = (props: PropsType) => {
     let dialogElements = props.dialogsPage.dialogsData.map(dialog => <DialogItem key={dialog.id} name={dialog.name}
-                                                                       id={dialog.id}/>)
-    let messageElements = props.dialogsPage.messagesData.map(message => <Message key={message.id} message={message.message}
-                                                                       id={message.id}/>)
+                                                                                 id={dialog.id}/>)
+    let messageElements = props.dialogsPage.messagesData.map(message => <Message key={message.id}
+                                                                                 message={message.message}
+                                                                                 id={message.id}/>)
 
     let newMessageElement = React.createRef<HTMLTextAreaElement>()
 
@@ -28,6 +31,8 @@ const Dialogs = (props: PropsType) => {
             props.updateNewMessageBody(textMessage)
         }
     }
+
+    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

@@ -4,8 +4,11 @@ import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {AppStoreType} from "../../redux/redux-store";
 import {withRouter} from "react-router"
+import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 type ProfilePropsType = {
     getUserProfile: (userId: number) => void
+    isAuth: boolean
 }
 
 class ProfileContainer extends React.Component<any> {
@@ -26,12 +29,14 @@ class ProfileContainer extends React.Component<any> {
 
 }
 
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
 let mapStateToProps = (state:AppStoreType) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
     }
 }
 
-let withUrlDataContainerComponent = withRouter(ProfileContainer)
+let withUrlDataContainerComponent = withRouter(AuthRedirectComponent)
 
 export default connect(mapStateToProps, {getUserProfile})(withUrlDataContainerComponent)
