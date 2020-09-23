@@ -19,8 +19,24 @@ export const userAPI = {
         return axiosWithSet.post(`follow/${id}`).then(res => res.data)
     },
     getProfile(userId: number) {
-        return axiosWithSet.get(`profile/${userId}`)
+        console.warn('This method is old. Please use profileAPI')
+        return profileAPI.getProfile(userId)
     }
+}
+
+
+export const profileAPI = {
+    getProfile(userId: number) {
+        return axiosWithSet.get(`profile/${userId}`)
+    },
+    getStatus(userId: number) {
+        return axiosWithSet.get(`profile/status/${userId}`)
+    },
+    updateStatus(status: string) {
+    return axiosWithSet.put(`profile/status`, {
+        status: status
+    })
+}
 }
 
 export const authAPI = {

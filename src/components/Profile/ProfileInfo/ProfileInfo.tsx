@@ -2,9 +2,12 @@ import React from "react";
 import s from './ProfileInfo.module.css'
 import {ProfileType} from "../Profile";
 import Preloader from "../../common/preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 type PropsType = {
     profile: null | ProfileType
+    status: string
+    updateStatus: () => void
 }
 
 export const ProfileInfo = (props: PropsType) => {
@@ -19,10 +22,10 @@ export const ProfileInfo = (props: PropsType) => {
                     alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                { props.profile.photos.large ? <img src={props.profile.photos.large} alt=""/> : null }
+                {props.profile.photos.large ? <img src={props.profile.photos.large} alt=""/> : null}
                 <h3>{props.profile.fullName}</h3>
                 <p>{props.profile.aboutMe}</p>
-                ava + description
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
         </div>
     )

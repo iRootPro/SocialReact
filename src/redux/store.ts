@@ -1,6 +1,6 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {
-    addPostActionCreator, setUserProfile,
+    addPostActionCreator, setStatus, setUserProfile,
     updateNewPostTextActionCreator
 } from "./profile-reducer";
 import {
@@ -15,7 +15,8 @@ export type ActionType =
     ReturnType<typeof addNewMessageActionCreator> |
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setStatus>
 
 export type StoreType = {
     _state: StateType,
@@ -34,7 +35,8 @@ export type StateType = {
 export type postsType = {
     posts: Array<PropsPostType>
     newPostText: string,
-    profile: null | ProfileType
+    profile: null | ProfileType,
+    status: string
 }
 
 export type DialogsDataType = {
