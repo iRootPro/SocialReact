@@ -1,6 +1,4 @@
 import {ActionType, DialogsDataType} from "./store";
-
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 
 let initState = {
@@ -15,37 +13,25 @@ let initState = {
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'Yo'}
     ],
-    newMessageText: ''
 }
 
 export const dialogsReducer = (state: DialogsDataType = initState, action: ActionType) => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            if (action.newMessage) {
-                return {...state, newMessageText: action.newMessage}
-            }
-            return state
         case ADD_NEW_MESSAGE:
             let newMessage = {
                 id: 5,
-                message: state.newMessageText
+                message: action.newMessageBody
             }
             const stateCopy = {...state}
             stateCopy.messagesData = [...state.messagesData]
             stateCopy.messagesData.push(newMessage)
-            stateCopy.newMessageText = ''
             return stateCopy
         default:
             return state
     }
 }
 
-export const updateNewMessageTextActionCreator = (textMessage: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessage: textMessage
-} as const)
-
-export const addNewMessageActionCreator = () => ({
-    type: ADD_NEW_MESSAGE
+export const addNewMessageActionCreator = (newMessageBody: string) => ({
+    type: ADD_NEW_MESSAGE, newMessageBody
 } as const)

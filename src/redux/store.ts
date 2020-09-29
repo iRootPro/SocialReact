@@ -1,20 +1,16 @@
 import {PropsPostType} from "../components/Profile/MyPosts/Post/Post";
 import {
-    addPostActionCreator, setStatus, setUserProfile,
-    updateNewPostTextActionCreator
+    addPostActionCreator, setStatus, setUserProfile
 } from "./profile-reducer";
 import {
     addNewMessageActionCreator,
-    updateNewMessageTextActionCreator
 } from "./dialogs-reducer";
 import {StateUserPageType} from "./users-reducer";
 import {ProfileType} from "../components/Profile/Profile";
 
 export type ActionType =
-    ReturnType<typeof updateNewMessageTextActionCreator> |
     ReturnType<typeof addNewMessageActionCreator> |
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatus>
 
@@ -34,7 +30,6 @@ export type StateType = {
 
 export type postsType = {
     posts: Array<PropsPostType>
-    newPostText: string,
     profile: null | ProfileType,
     status: string
 }
@@ -42,7 +37,6 @@ export type postsType = {
 export type DialogsDataType = {
     dialogsData: Array<PropsDialogType>
     messagesData: Array<PropsMessageType>,
-    newMessageText: string
 }
 
 export type PropsDialogType = {

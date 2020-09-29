@@ -1,7 +1,7 @@
 import {
     ActionType,
 } from "../../redux/store";
-import {addNewMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+import {addNewMessageActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStoreType} from "../../redux/redux-store";
@@ -15,11 +15,8 @@ let mapStateToProps = (state: AppStoreType) => {
 }
 let mapDispatchToProps = (dispatch: (action: ActionType) => void) => {
     return {
-        updateNewMessageBody: (text: string) => {
-            dispatch(updateNewMessageTextActionCreator(text))
-        },
-        sendMessage: () => {
-            dispatch(addNewMessageActionCreator())
+        sendMessage: (newMessageBody: string) => {
+            dispatch(addNewMessageActionCreator(newMessageBody))
         }
     }
 }
