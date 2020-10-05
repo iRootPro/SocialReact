@@ -42,5 +42,11 @@ export const profileAPI = {
 export const authAPI = {
     me() {
        return  axiosWithSet.get(`auth/me`)
+    },
+    login(email: string, password: string, rememberMe: boolean) {
+        return  axiosWithSet.post(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return  axiosWithSet.delete(`auth/login`)
     }
 }

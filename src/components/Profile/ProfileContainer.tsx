@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import {AppStoreType} from "../../redux/redux-store";
 import {withRouter} from "react-router"
-import {Redirect} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 type ProfilePropsType = {
     getUserProfile: (userId: number) => void
@@ -14,7 +13,7 @@ type ProfilePropsType = {
 class ProfileContainer extends React.Component<any> {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId = 9826
+        if (!userId) userId = this.props.autorizedUserId
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
     }
@@ -35,7 +34,9 @@ let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 let mapStateToProps = (state:AppStoreType) => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 }
 
