@@ -1,14 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/store";
-import {
-    followSuccess, toggleFollowingProgress,
-    setCurrentPage,
-    unFollowSuccess,
-    UserType, getUsers
-} from "../../redux/users-reducer";
+import {followSuccess, getUsers, setCurrentPage, unFollowSuccess, UserType} from "../../redux/users-reducer";
 import Users from "./Users";
 import preloader from "./../../assets/img/preloader.svg"
+import {
+    getAllUsers,
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount
+} from "../../redux/users-selectors";
+import {AppStoreType} from "../../redux/redux-store";
 
 type PropsType = {
     users: Array<UserType>,
@@ -50,14 +54,25 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-const mapStateToProps = (state: StateType) => {
+// const mapStateToProps = (state: StateType) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalCount: state.usersPage.totalCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
+
+const mapStateToProps = (state: AppStoreType) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getAllUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
